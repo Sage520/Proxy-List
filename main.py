@@ -5,7 +5,7 @@ import pymongo
 import urllib.parse
 
 mongo_username = os.environ.get('DB_USERNAME')
-mongo_password = urllib.parse.quote_plus(os.environ.get('DB_PASSWORD'))
+mongo_password = urllib.parse.quote_plus(str(os.environ.get('DB_PASSWORD')))
 mongo_host = os.environ.get('DB_HOST')
 mongo_db = 'shark_proxy'
 mongo_uri = f'mongodb://{mongo_username}:{mongo_password}@{mongo_host}/?authSource={mongo_db}'
