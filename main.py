@@ -2,10 +2,13 @@
 
 import os
 import pymongo
+import urllib.parse
 
-
-mongo_uri = os.environ.get('DB_URI')
-mongo_db = 'db'
+mongo_username = os.environ.get('DB_USERNAME')
+mongo_password = urllib.parse.quote_plus(os.environ.get('DB_PASSWORD'))
+mongo_host = os.environ.get('DB_HOST')
+mongo_db = 'shark_proxy'
+mongo_uri = f'mongodb://{mongo_username}:{mongo_password}@{mongo_host}/?authSource={mongo_db}'
 mongo_collection = 'proxy'
 
 # 连接到MongoDB数据库
@@ -25,6 +28,10 @@ type_file_map = {
     '3': 'socks4.txt',
     '4': 'socks5.txt'
 }
+for v in type_file_map.values():
+    with open(v, "w") as file:
+        pass
+
 for result in results:
     data = result['ip'] + ':' + result['port']
     proxy_type = str(result['type'])
