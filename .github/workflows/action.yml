@@ -33,7 +33,9 @@ jobs:
 
       - name: Run Python
         env:
-          DB_URI: ${{ secrets.DB_URI }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: python main.py
 
       - name: Commit files
