@@ -43,7 +43,9 @@ jobs:
           git config --local user.email ${{ secrets.GIT_EMAIL }}
           git config --local user.name ${{ secrets.GIT_NAME }}
           git config credential.username ${{ secrets.GIT_NAME }}
-          git commit -am "Updated Proxies"
+          # 在提交信息后追加当前时间
+          git commit -am "Updated Proxies $(date +'%Y-%m-%d %H:%M:%S')"
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
