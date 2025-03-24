@@ -20,6 +20,8 @@ collection = db[mongo_collection]
 query = {"status": 1}
 projection = {"_id": 0, "ip": 1, "port": 1, "type": 1}
 results = collection.find(query, projection)
+results = list(results)
+print(f'total size: {len(results)}')
 
 # 输出查询结果
 type_file_map = {
@@ -29,8 +31,8 @@ type_file_map = {
     '4': 'socks5.txt'
 }
 for v in type_file_map.values():
-    with open(v, "w") as file:
-        pass
+    if os.path.exists(v):
+        os.remove(v)
 
 for result in results:
     data = result['ip'] + ':' + result['port']
